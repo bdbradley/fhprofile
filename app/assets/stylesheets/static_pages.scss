@@ -46,7 +46,7 @@ h2{
 }
 
 .about-container {
-   background: url(bg4.jpg) no-repeat center center fixed; 
+   background: image-url('bg4.jpg') no-repeat center center fixed; 
   /*targets older web browsers*/
   /*webkit targets google, safari*/
   -webkit-background-size: cover; 
