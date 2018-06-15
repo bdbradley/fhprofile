@@ -33,6 +33,7 @@
       <li><a href="#code-samples" class="nav-link">Code Samples</a></li>
       <li><a href="#web-apps" class="nav-link">Web Apps</a></li>
       <li><a href="#skills-and-tools" class="nav-link">Skills &amp; Tools</a></li>
+      <li><a href="https://github.com/bdbradley" class="nav-link">Github</a></li>
       <li class="hire-me"><a href="#hire-me" class="nav-link">Hire Me</a></li>
     </ul>  
 
@@ -48,7 +49,7 @@
 
        <hr class="grey"/>
        <p class="bio"> 
-          Focusing on Ruby - Rails - JS - HTML - CSS
+          Focusing on Ruby - Rails - HTML - CSS - JS
           <br><br>
           Graduate of the Firehose Project coding bootcamp
           
@@ -65,7 +66,7 @@
 
    <h4> Temperature Conversion</h4>
    <p>
-   This ruby program will prompt the user for the temperature
+   Prompts the user for the temperature
    in degrees Celsius and let the user know the corresponding 
    temperature in Fahrenheit.
    </p>
@@ -117,16 +118,15 @@ end </code></pre>
 
 <div class="box">
   <h4>Ordinal Challenge</h4>
-  <p>This ruby program will convert a plain number
-  to the ordinal of the number. For example, if the user enters 2, the program will return 2nd.
+  <p>This program will convert a plain number to the ordinal of the number. For example, if the user enters 2, the program will return 2nd.
   If the user enters 3, it will return 3rd, etc.</p>
 </div>
 
 <br class="clear" />
 
 <div class="box">
-  <h4>Foobar challenge</h4>
-  <p>This ruby program is an adaptation of a classic technical interview problem 
+  <h4>Foobar</h4>
+  <p>An adaptation of a technical interview problem 
   which displays sequences of the Foobar pattern.</p>
 </div>
 
@@ -169,12 +169,114 @@ foobar(user_number) </code></pre>
 
 <br class="clear" />
 
+<div class="box">
+ <pre><code class="language-ruby">
+class Tree
+  attr_accessor :payload, :children
+
+  def initialize(payload, children)
+    @payload = payload
+    @children = children
+  end
+
+  def breadth_first(n)
+
+    queue = MyQueue.new
+    puts @payload
+    return self if @payload == n
+    @children.each do |child| 
+      # pushes each child onto stack 
+      queue.enqueue(child)
+    end  
+
+    while queue.has_elements? do 
+      # 'pops' off of queue and assigns to next_node
+      next_node = queue.dequeue
+        puts next_node.payload
+      return next_node if next_node.payload == n
+      next_node.children.each do |child|
+        puts &quot;enquing #{child.payload}&quot;
+        queue.enqueue(child)
+      end
+    end
+    puts &quot;nil&quot;
+  end
+
+  def depth_first
+  #@payload would be 2
+    puts @payload
+    #Returns tree(11)
+    return self if @payload == 11
+    #if payload not 11 loops through children
+    @children.each do |child|
+      #Sets child to var1 and returns if not nil
+      var1 = child.depth_first
+      return var1 unless var1.nil?
+    end
+    nil
+  end
+end
+
+#Queue
+class MyQueue
+  def initialize
+    @queue = []
+  end
+
+  def enqueue(child)
+    @queue.push(child)
+  end
+
+  def dequeue
+    @queue.shift
+  end
+
+  def has_elements?
+    !@queue.empty?
+  end
+end
+
+# The &quot;Leafs&quot; of a tree, elements that have no children
+deep_fifth_node = Tree.new(5, [])
+eleventh_node = Tree.new(11, [])
+fourth_node   = Tree.new(4, [])
+
+# The &quot;Branches&quot; of the tree
+ninth_node = Tree.new(9, [fourth_node])
+sixth_node = Tree.new(6, [deep_fifth_node, eleventh_node])
+seventh_node = Tree.new(7, [sixth_node])
+shallow_fifth_node = Tree.new(5, [ninth_node])
+
+# The &quot;Trunk&quot; of the tree
+trunk   = Tree.new(2, [seventh_node, shallow_fifth_node])
+
+puts &quot;Depth First Method:&quot;
+puts trunk.depth_first
+puts &quot;--------------------&quot;
+puts &quot;Breadth First Method:&quot;
+puts trunk.breadth_first(11)
+</code></pre>
+
+</div>
+
+<div class="box">
+  <h4>Depth / Breadth First Search</h4>
+  <p>Depth-first search is an algorithm for traversing tree data structures. The algorithm starts at the root node then explores as far as possible along each branch before backtracking.
+  <br><br>
+  Breadth-first search starts at the root node and explores all of the neighbor nodes at the present depth then moves on to the nodes at the next depth.</p>
+  <%= image_tag "tree.png", :class => "full-width" %>
+</div>
+
+<br class="clear" />
+
 <h3 id="web-apps">Web Apps</h3>
     <hr class="black" />
 
     <div class="box">
       <h4>Quote Generator</h4>
-      <img src="splurty.png" class="full-width" />
+        <a href="https://splurty-barry-bradley.herokuapp.com">
+          <%= image_tag "splurty1.JPG", :class => "full-width" %>
+        </a>
       <p>
         A database-powered quote generator with a mobile-first
         design, using the Ruby on Rails framework, HTML, and CSS.
@@ -185,7 +287,9 @@ foobar(user_number) </code></pre>
 
     <div class="box">
       <h4>Yelp Clone</h4>
-      <img src="nomster.png" class="full-width" />
+      <a href="https://nomster-barry-bradley.herokuapp.com">
+        <%= image_tag "nomster1.png", :class => "full-width" %>
+      </a>
       <p>
         A Yelp clone that integrates with the Google Maps API
         and includes features like user comments, star ratings,
@@ -196,7 +300,9 @@ foobar(user_number) </code></pre>
 
     <div class="box">
       <h4>Two-Sided Market Place</h4>
-      <img src="flixter.png" class="full-width" />
+      <a href="https://flixter-barry-bradley.herokuapp.com">
+        <%= image_tag "flixter1.png", :class => "full-width" %>
+      </a>
       <p>
         A two-sided, video-streaming marketplace platform that
         features credit card payment capabilities, user role
@@ -205,26 +311,29 @@ foobar(user_number) </code></pre>
       </p>
     </div>
     <div class="box">
-      <h4>Test Driven Development</h4>
-      <img src="grammable.png" class="full-width" />
+      <h4>Test Driven Development App</h4>
+      <a href="https://grammable-barry-bradley.herokuapp.com">
+        <%= image_tag "grammable1.png", :class => "full-width" %>
+      </a>
       <p>
-        An Instagram clone that was built using industry-standard, test-driven
-        development following numerous red/green/refactor cycles.
+        An Instagram-type clone that was built using test-driven development following numerous red/green/refactor cycles.
       </p>
     </div>
     <br class="clear" />
     <div class="box">
-      <h4>Single Page To-do Application</h4>
-      <img src="todoster.png" class="full-width" />
-      <p>
-        This single-page to-do application features a
-        fluid user interface that, by using JavaScript,
-        allows users to rapidly add dynamic content.
-      </p>
+        <h4>Single Page To-do App</h4>
+        <a href="https://todoapp-barry-bradley.herokuapp.com">
+          <%= image_tag "todoster1.png", :class => "full-width" %>
+        </a>
+        <p>
+          This single-page to-do application features a
+          fluid user interface that, by using JavaScript,
+          allows users to rapidly add dynamic content.
+        </p>
     </div>
     <div class="box">
       <h4>Agile Team Project</h4>
-      <img src="chess.png" class="full-width" />
+      <%= image_tag "chess.png", :class => "full-width" %>
       <p>
         Worked on an Agile software development team building
         a chess application. Under the guidance of a senior software engineer,
@@ -243,29 +352,28 @@ foobar(user_number) </code></pre>
       in the following programming languages and tools.
     </p>
   <div class="icons">
-
-   <img src="github.png" class="icon"/>
-    <img src="rubocop.png" class="icon"/>
-    <img src="trello.png" class="icon"/>
-    <img src="slack.png" class="icon"/>
-    <img src="codeship.png" class="icon"/>
+    <%= image_tag("github.png") %> 
+    <%= image_tag("trello.png") %> 
+    <%= image_tag("slack.png") %> 
+    <%= image_tag("heroku_s.png") %> 
   
     <br class="clear" />
-    <img src="skills.png" class="icon"/>
+    <%= image_tag("skills.png") %> 
+    
 
   </div>
 
   <div class="contact-me" id="hire-me">
      <h3 class="contact-headline">Contact</h3>
      <hr class="grey" />
-     
+
       <p class="contact-info">
         Currently entertaining new opportunities.
         Please get in touch via email:
 
       </p>
 
-        <p>
+      <p>
         <a href="mailto:bbradley13@gmail.com" class="contact-link">
           bbradley13@gmail.com
         </a>
